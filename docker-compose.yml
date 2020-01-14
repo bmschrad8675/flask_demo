@@ -1,0 +1,18 @@
+version: "3.5"
+services:
+  mds-analytics:
+    build: .
+    command: python3 run.py
+    container_name: flask_demo
+    image: flask_demo:local
+    environment:
+      - FLASK_ENV=development
+    ports:
+      - "5050:5050"
+    networks:
+      - simple-network
+    volumes:
+      - .:/app
+networks:
+  simple-network:
+    name: simple-network

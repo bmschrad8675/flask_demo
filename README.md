@@ -7,8 +7,10 @@ python3 start.py
 ```
 
 ## Demo points
-Docker run command
+Docker commands
 ```sh
+docker build -t flask_demo:local .
+docker run --rm --network=host -p 5050:5050 --name flask_demo flask_demo:local
 ```
 
 SQL Injection Exploit
