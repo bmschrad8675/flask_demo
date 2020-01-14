@@ -18,16 +18,29 @@ def populate_users():
     con = db_connect()
     cur = con.cursor()
 
-    # Remove any existing users
-    cur.execute('DELETE FROM users')
+    # Remove existing users table if exists
+    cur.execute('DROP TABLE IF EXISTS users')
+
+    # Create users table
+    cur.execute("""
+                CREATE TABLE users (
+                    id integer PRIMARY KEY
+                    , username text NOT NULL
+                    , first_name text NOT NULL
+                    , last_name text NOT NULL
+                    , email text NOT NULL
+                    , company_id integer NOT NULL
+                    )
+                """)
 
     # Template for inserting users
-    users_sql = 'INSERT INTO users (username, first_name, last_name, company_id) VALUES (?, ?, ?, ?)'
+    users_sql = 'INSERT INTO users (username, first_name, last_name, email, company_id) VALUES (?, ?, ?, ?, ?)'
 
     # Loop through csv and insert
     with open(USERS_FILE, newline='') as f:
         reader = csv.reader(f)
         for row in reader:
-            cur.execute(users_sql, (row[0], row[1],  row[2], row[3]))
+            print(row)
+            cur.execute(users_sql, (row[0], row[1],  row[2], row[3], row[4]))
 
     con.commit()
