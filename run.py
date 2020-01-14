@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, request
 import json
 from misc.db_utils import db_connect, populate_users
 from misc.html_utils import getHomeMessage, getTableHeader
@@ -30,6 +30,21 @@ def userList(company_id):
     txtFooter = '</table>'
 
     return ''.join([txtHeader, txtUser, txtFooter])
+
+
+@app.route('/users/<userId>', methods=['PUT'])
+def addUser(userId):
+    print(request.args)
+    firstName = request.args.get('firstName')
+
+    con = db_connect()
+    cur = con.cursor()
+    user_sql = f"UPDATE users SET first_name = '{firstName}' where id = {userId}"
+    print(user_sql)
+
+    cur.executescript(user_sql)
+
+    return f'User id: {userId} updated with first name: {firstName}'
 
 
 @app.route('/users/generate/')
