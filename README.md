@@ -7,7 +7,7 @@ python3 run.py
 ```
 
 Regenerate user table and date:
-[http://devops.simpleltc.com:5050/users/generate/]
+<http://devops.simpleltc.com:5050/users/generate/>
 
 ## Demo points
 Docker commands
